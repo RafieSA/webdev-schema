@@ -1,39 +1,59 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+/**
+ * Product_model
+ *
+ * Model ini bertanggung jawab untuk semua operasi database
+ * yang terkait dengan tabel 'produk'.
+ */
 class Product_model extends CI_Model {
 
-    // Nama tabel di database kita
+    // Mendefinisikan nama tabel utama
     private $table = 'produk';
 
-    // Fungsi untuk mengambil SEMUA produk
+    /**
+     * Mengambil semua data produk dari database.
+     * @return array
+     */
     public function get_all() {
-        // Sama seperti: SELECT * FROM produk
         return $this->db->get($this->table)->result();
     }
 
-    // Fungsi untuk mengambil SATU produk berdasarkan ID
+    /**
+     * Mengambil satu baris data produk berdasarkan ID.
+     * @param int $id ID produk
+     * @return object
+     */
     public function get_by_id($id) {
-        // Sama seperti: SELECT * FROM produk WHERE id = $id
         return $this->db->get_where($this->table, ['id' => $id])->row();
     }
 
-    // Fungsi untuk menyimpan data baru
+    /**
+     * Memasukkan data produk baru ke database.
+     * @param array $data Data asosiatif produk
+     * @return bool
+     */
     public function insert($data) {
-        // Sama seperti: INSERT INTO produk (kolom1, kolom2) VALUES (nilai1, nilai2)
         return $this->db->insert($this->table, $data);
     }
 
-    // Fungsi untuk meng-update data
+    /**
+     * Memperbarui data produk yang ada berdasarkan ID.
+     * @param int $id ID produk
+     * @param array $data Data asosiatif produk
+     * @return bool
+     */
     public function update($id, $data) {
-        // Ini adalah sintaks yang ditanyakan di soal PG no. 10
-        // $this->db->update('nama_table', data, kondisi)
         return $this->db->update($this->table, $data, ['id' => $id]);
     }
 
-    // Fungsi untuk menghapus data
+    /**
+     * Menghapus data produk berdasarkan ID.
+     * @param int $id ID produk
+     * @return bool
+     */
     public function delete($id) {
-        // Sama seperti: DELETE FROM produk WHERE id = $id
         return $this->db->delete($this->table, ['id' => $id]);
     }
 }
